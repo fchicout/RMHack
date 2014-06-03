@@ -8,27 +8,49 @@ init();
 
 Tabletop.init({
 	key : 'https://docs.google.com/spreadsheets/d/14h_bBHXosaM8eQaLi0GI1T6_zssV1uNqSWYp50BYfTA/pubhtml',
-	callback : grabCompetenceData,
+	callback : grabData,
 	simpleSheet : false
 });
 
-var grabCompetenceData = function(data, tabletop){
+var grabData = function(data, tabletop){
 	var curso = frames[2].document.getElementById('lblNomeCurso').innerText;
 	var ddlCompetences = frames[2].document.getElementById('ddlEtapaNota');
-	var competence = ddlCompetences.options[ddlCompetences.selectedIndex].innerText.replace('Rec','r').replace('Comp','c');
+	var ddlMonths = frames[2].document.getElementById('ddlEtapaFalta');
+
 
 	var disciplina = frames[2].document.getElementById('lblNomeDisciplina').innerText;
 	var sheetName = frames[2].document.getElementById('lblNomeTurma').innerText+'-'+disciplina;
 	var bruteRows = frames[2].document.getElementById('dgAlunos').rows;
 
 	var gsheetData = tabletop.sheets(sheetName).all();
-																       
-	for(var j = 0; j< gsheetData.length; j++ ){
-		for(var i = 1; i<bruteRows.length; i++){
-		       if(gsheetData[j].estudante === bruteRows[i].cells[2].innerText){
-			       score = gsheetData[j][competence];
+	
+	if(!ddlCompetences.disabled){
+		var competence = ddlCompetences.options[ddlCompetences.selectedIndex].innerText.replace('Rec','r').replace('Comp','c');
+		for(var j = 0; j< gsheetData.length; j++ ){
+			for(var i = 1; i<bruteRows.length; i++){
+			       if(gsheetData[j].estudante === bruteRows[i].cells[2].innerText){
+				       score = gsheetData[j][competence];
 				       bruteRows[i].cells[4].getElementsByTagName('input')[0].value = score;
+			       }
 		       }
-	       }
+		}
 	}
+
+	if(!ddlMonths.disabled){
+		var abscence = 'f' + ddlMonths.selectedIndex;
+		for(var j = 0; j< gsheetData.length; j++ ){
+			for(var i = 1; i<bruteRows.length; i++){
+			       if(gsheetData[j].estudante === bruteRows[i].cells[2].innerText){
+				       score = gsheetData[j][abscence];
+				       bruteRows[i].cells[4].getElementsByTagName('input')[0].value = score;
+				       score = gsheetData[j][abscence.replace('f','a')];
+				       bruteRows[i].cells[5].getElementsByTagName('input')[0].value = score;
+
+			       }
+		       }
+		}
+	}
+
+
 };
+
