@@ -37,7 +37,7 @@ var grabData = function(data, tabletop){
 	}
 
 	if(!ddlMonths.disabled){
-		var abscence = 'f' + ddlMonths.selectedIndex;
+		var abscence = 'f' + ddlMonths.selectedIndex-1;
 		for(var j = 0; j< gsheetData.length; j++ ){
 			for(var i = 1; i<bruteRows.length; i++){
 			       if(gsheetData[j].estudante === bruteRows[i].cells[2].innerText){
