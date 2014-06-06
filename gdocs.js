@@ -2,12 +2,16 @@ var init = function(){
 	var tt = document.createElement('script');
 	tt.src = "//cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.3.5/tabletop.js";
 	document.getElementsByTagName('head')[0].appendChild(tt);
+	if (localStorage.RMHackSheetUrl != ""){
+		localStorage.setItem("RMHackSheetUrl", prompt("Qual o período letivo? (2014.2, 2014.1, ...)")+ "|" +prompt("Entre com o link público da sua planilha no Google SpreadSheets"));
+	}
 };
 
 init();
 
 Tabletop.init({
-	key : 'https://docs.google.com/spreadsheets/d/14h_bBHXosaM8eQaLi0GI1T6_zssV1uNqSWYp50BYfTA/pubhtml',
+	//key : 'https://docs.google.com/spreadsheets/d/14h_bBHXosaM8eQaLi0GI1T6_zssV1uNqSWYp50BYfTA/pubhtml',
+	key : localStorage.RMHackSheetUrl.split('|')[1], 
 	callback : grabData,
 	simpleSheet : false
 });
