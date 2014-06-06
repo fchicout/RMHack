@@ -10,7 +10,7 @@ Agora integrado com o GoogleSpreadsheets.
 1. Copie a planilha do google na url: "url da spreadsheet 1";
 2. Abra a planilha e na aba dela:
    1. Vá no menu arquivo (file) e publique a planilha (Publish to Web). Copie a url dada na tela de publicação;
-2. Clique, segure e arraste os links AQUI e AQUI para sua barra de bookmarks no seu navegador.
+2. Clique, segure e arraste os links [RM-GDocs-Init]() e [RM-Gdocs-Import]() para sua barra de bookmarks no seu navegador.
 3. Na sua barra de bookmarks, clique no RM-GdocsInit. Ele abrirá na primeira vez um prompt pedindo a url copiada no passo 2.1. Forneça e confirme;
 
 ## Utilização
