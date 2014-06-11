@@ -6,9 +6,6 @@ var init = function(){
         tt.src = "//cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.3.5/tabletop.js";
         document.getElementsByTagName('head')[0].appendChild(tt);
         var periodo = frames[2].document.getElementById('ControlaMenu1_lbPerLetivo').innerText.split(' ')[2];
-        //if (localStorage.RMHackSheetUrl !== ""){
-        //      localStorage.setItem("RMHackSheetUrl", periodo + "|" + prompt(("Entre com o link público da sua planilha no Google SpreadSheets para o período " + periodo)));
-        //}
         var grabData = function(data, tabletop){
                 var curso = frames[2].document.getElementById('lblNomeCurso').innerText;
                 var ddlCompetences = frames[2].document.getElementById('ddlEtapaNota');
@@ -29,7 +26,7 @@ var init = function(){
                          }
                 }
                 if(!ddlMonths.disabled){
-                        var abscence = 'f' + ddlMonths.selectedIndex-1;
+                        var abscence = 'f'+ddlMonths.selectedIndex+'-'+ddlMonths.options[ddlMonths.selectedIndex].innerText.substr(0,3).toLowerCase();
                         for(var j = 0; j< gsheetData.length; j++ ){
                                 for(var i = 1; i<bruteRows.length; i++){
                                        if(gsheetData[j].estudante === bruteRows[i].cells[2].innerText){
@@ -43,7 +40,6 @@ var init = function(){
                 }
         };
         Tabletop.init({
-                        //key : localStorage.RMHackSheetUrl.split('|')[1],
                                 key : 'https://docs.google.com/spreadsheets/d/14h_bBHXosaM8eQaLi0GI1T6_zssV1uNqSWYp50BYfTA/pubhtml',
                            callback : grabData,
                         simpleSheet : false
